@@ -1,0 +1,4 @@
+pinecone-client
+tqdm
+langchain
+llama-cpp-python
