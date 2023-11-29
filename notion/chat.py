@@ -9,7 +9,6 @@ from langchain.agents import initialize_agent
 from langchain.agents import Tool
 import pinecone
 
-index_name = 'notion-db-chatbot'
 
 def init(index_name):
     load_dotenv(find_dotenv())
@@ -91,11 +90,13 @@ def get_prompt(agent):
             except Exception as e:
                 print(e)
 
-
+def run_agent():
+    index_name = 'notion-db-chatbot'
+    openai_api_key, vectordb = init(index_name)
+    agent = create_agent(openai_api_key, vectordb)
+    get_prompt(agent)
 
 
 # run our main function
 if __name__ == '__main__':
-    openai_api_key, vectordb = init(index_name)
-    agent = create_agent(openai_api_key, vectordb)
-    get_prompt(agent)
+    run_agent()
