@@ -1,0 +1,7 @@
+pinecone-client
+tqdm
+langchain
+llama-cpp-python
+python-dotenv
+openai
+tiktoken
