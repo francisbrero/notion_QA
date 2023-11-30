@@ -25,3 +25,8 @@ source venv/bin/activate
 ```
 pip install -r requirements.txt
 ```
+
+# Run embeddings for a Notion workspace
+```bash
+python ./notion/train.py --n support_runbook
+```
