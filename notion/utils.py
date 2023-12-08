@@ -50,3 +50,17 @@ def get_conversation_string():
         conversation_string += "Human: "+st.session_state['requests'][i] + "\n"
         conversation_string += "Bot: "+ st.session_state['responses'][i+1] + "\n"
     return conversation_string
+
+
+# create a function to format the sources as a link
+# we will get the id from the metadata of the retrieved document as described in the example below:
+# if sources = "notion_data/support_runbook/Support runbooks d2a894351f944fc5b4abb9f29f30b4a4/User cannot deploy model from the Studio dd2630484a334e159dd9bf07086824ad.md" then the id is dd2630484a334e159dd9bf07086824ad
+prefix = 'https://www.notion.so/madkudu/'
+
+def format_sources(sources):
+    formatted_sources = ""
+    if sources is None:
+        return formatted_sources
+    source_id = sources.split('/')[-1].split('.')[0].replace(' ','-')
+    formatted_sources = prefix + source_id
+    return formatted_sources

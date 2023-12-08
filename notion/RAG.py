@@ -3,7 +3,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.vectorstores import Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
-from langchain.chains import ConversationalRetrievalChain
+from langchain.chains import ConversationalRetrievalChain, RetrievalQAWithSourcesChain
 from dotenv import find_dotenv, load_dotenv
 from langchain.agents import initialize_agent
 from langchain.agents import Tool
@@ -50,17 +50,23 @@ def create_qa_chain():
         chain_type="stuff",
         retriever=vectordb.as_retriever()
     )
+    # retrieval qa chain with source
+    qa_chain_with_source = RetrievalQAWithSourcesChain.from_chain_type(
+        llm=llm,
+        chain_type="stuff",
+        retriever=vectordb.as_retriever(),
+        memory=conversational_memory
+    )
 
-
-    return qa_chain
+    return qa_chain, qa_chain_with_source
 
 
 def query_RAG():
     index_name = 'notion-db-chatbot'
     openai_api_key, vectordb = init_rag(index_name)
-    qa_chain = create_qa_chain(openai_api_key, vectordb)
+    qa_chain, qa_chain_with_source = create_qa_chain(openai_api_key, vectordb)
 
-    return qa_chain
+    return qa_chain, qa_chain_with_source
 
 # main function
 if __name__ == "__main__":
