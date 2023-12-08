@@ -1,0 +1,8 @@
+{
+        "queries": [
+            {"query": "what should we do if an operator is be able to deploy from the studio themselves?"},
+            {"query": "What should I do if a lead has a weird score?"},
+            {"query": "What should I check if score of a lead has changed?"}
+        ]
+
+}
