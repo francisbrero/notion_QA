@@ -5,4 +5,4 @@ llama-cpp-python
 python-dotenv
 openai
 tiktoken
-streamlit-1.24.0
+streamlit
