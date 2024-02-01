@@ -1,7 +1,9 @@
 # notion_QA
-Build a chatbot trained on your Notion Workspace data
+Build a chatbot trained on your Notion Workspace data and host it via Streamlit
+![Alt text](image.png)
 
 # Available in Streamlit for testing
+[Internal MadKudu Version](https://mk-support-runbook.streamlit.app/)
 
 # Download your Notion Workspace data
 1. Go to your Notion Workspace
