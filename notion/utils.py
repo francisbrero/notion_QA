@@ -1,7 +1,27 @@
 import streamlit as st
 import time
+import os
+from langchain.vectorstores import Pinecone
+from langchain.embeddings.openai import OpenAIEmbeddings
+from dotenv import find_dotenv, load_dotenv
+import pinecone
 
+def init_rag(index_name):
+    load_dotenv(find_dotenv())
 
+    # initialize connection to pinecone (get API key at app.pinecone.io)
+    pinecone_api_key = os.getenv("PINECONE_API_KEY")
+    # find your environment next to the api key in pinecone console
+    pinecone_env = os.getenv("PINECONE_ENV")
+    # get our OpenAI API key
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+
+    # get the vector database
+    pinecone.init(api_key=pinecone_api_key, environment=pinecone_env)
+    embeddings = OpenAIEmbeddings()
+    vectordb = Pinecone.from_existing_index(index_name=index_name, embedding=embeddings)
+
+    return openai_api_key, vectordb
 
 def add_sidebar(st):
     """Adds the sidebar to the streamlit app."""

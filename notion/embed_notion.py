@@ -79,17 +79,25 @@ if __name__ == '__main__':
     # get arguments from the command line
     parser = ArgumentParser()
     parser.add_argument("-n", "--notion", dest="notion_dir_name", help="what notion directory do you want to embed", metavar="NOTION_DIR", default="support_runbook")
+    parser.add_argument("--insert", dest="insert", help="insert the embeddings into the index", action="store_true")
     args = parser.parse_args()
     notion_dir_name = args.notion_dir_name
+    insert = args.insert | False
     index_name = 'notion-db-chatbot'
     print("Ok let's go!")
     pinecone_api_key, pinecone_env, notion_dir = init(notion_dir_name)
     print("Split the documents into chunks of 500 characters with 0 overlap.")
     all_splits = load_notion_db(notion_dir)
-    print("Initializing the pinecone index...")
-    index = init_pinecone_index(index_name, pinecone_api_key, pinecone_env)
-    print("we've created an index and here is it's description") 
-    index.describe_index_stats()
+    if insert == False:
+        print("Initializing the pinecone index...")
+        index = init_pinecone_index(index_name, pinecone_api_key, pinecone_env)
+        print("we've created an index and here is it's description") 
+        index.describe_index_stats()
+    else:
+        pinecone.init(api_key=pinecone_api_key, environment=pinecone_env)
+        index = pinecone.Index(index_name)
+        print("we've loaded an existing index and here is it's description")
+        index.describe_index_stats()
     print("let's embed the splits into the index, this might take some time and will cost you $")
     embed_splits_openai(all_splits, index_name)
     print("... and we're done! here is the index description again")

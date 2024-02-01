@@ -6,7 +6,7 @@ from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts import PromptTemplate
-from train import init_pinecone_index
+from notion.embed_notion import init_pinecone_index
 from RAG import init_rag
 from utils import add_sidebar, format_sources
 

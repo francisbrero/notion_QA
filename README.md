@@ -1,6 +1,8 @@
 # notion_QA
 Build a chatbot trained on your Notion Workspace data
 
+# Available in Streamlit for testing
+
 # Download your Notion Workspace data
 1. Go to your Notion Workspace
 2. Click on Settings & Members
@@ -26,7 +28,25 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-# Run embeddings for a Notion workspace
+## Run embeddings for a Notion workspace
+Note: this will take a while as it drops and creates your vector database
 ```bash
-python ./notion/train.py --n support_runbook
+python ./notion/embed_notion.py --n support_runbook
+```
+
+## Run the chatbot with streamlit
+```bash 
+streamlit run ./notion/support.py
+```
+
+## Add more documents from Notion to your vector database
+if you want to add more documents from a Notion export to your vector database, you can run the following command
+```bash
+python ./notion/embed_notion.py --n product_operations --insert
+```
+
+### Add more documents from Zendesk to your vector database
+if you want to add more documents from a Zendesk export to your vector database, you can run the following command
+```bash 
+python ./notion/embed_zendesk.py --z product_operations --insert --zendesk
 ```

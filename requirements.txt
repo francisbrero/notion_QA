@@ -6,3 +6,7 @@ python-dotenv
 openai
 tiktoken
 streamlit
+html2text
+bs4
+transformers
+nltk

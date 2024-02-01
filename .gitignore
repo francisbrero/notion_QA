@@ -1,5 +1,6 @@
 # notion data folder
 notion_data/*
+zendesk_data/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
