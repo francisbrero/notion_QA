@@ -1,12 +1,9 @@
 # Import necessary modules
-import os
-from dotenv import find_dotenv, load_dotenv
 import streamlit as st
 from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts import PromptTemplate
-from notion.embed_notion import init_pinecone_index
 from utils import init_rag, add_sidebar, format_sources
 
 # Set up the Streamlit app
