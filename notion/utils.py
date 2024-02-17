@@ -17,7 +17,7 @@ def init_rag(index_name):
     openai_api_key = os.getenv("OPENAI_API_KEY")
 
     # get the vector database
-    pinecone.init(api_key=pinecone_api_key, environment=pinecone_env)
+    pinecone.Pinecone(api_key=pinecone_api_key, environment=pinecone_env)
     embeddings = OpenAIEmbeddings()
     vectordb = Pinecone.from_existing_index(index_name=index_name, embedding=embeddings)
 

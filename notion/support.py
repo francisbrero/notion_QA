@@ -7,8 +7,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts import PromptTemplate
 from notion.embed_notion import init_pinecone_index
-from RAG import init_rag
-from utils import add_sidebar, format_sources
+from utils import init_rag, add_sidebar, format_sources
 
 # Set up the Streamlit app
 st.set_page_config(page_title="MadKudu: Support Rubook Chat 🧠", page_icon=":robot_face:")
