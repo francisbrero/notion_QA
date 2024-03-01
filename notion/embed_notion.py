@@ -1,10 +1,10 @@
 import os
 from dotenv import find_dotenv, load_dotenv
-from langchain.vectorstores import Pinecone
-from langchain.document_loaders import NotionDirectoryLoader
+from langchain_pinecone import PineconeVectorStore
+from langchain_community.document_loaders import NotionDirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings.openai import OpenAIEmbeddings
-import pinecone
+from langchain_openai import OpenAIEmbeddings
+from pinecone import Pinecone
 import tqdm
 import time
 from argparse import ArgumentParser
@@ -42,7 +42,7 @@ def load_notion_db(notion_dir):
 def init_pinecone_index(index_name, pinecone_api_key, pinecone_env):
     """Initializes the pinecone index."""
     
-    pinecone.init(api_key=pinecone_api_key, environment=pinecone_env)
+    pinecone = Pinecone(api_key=pinecone_api_key, environment=pinecone_env)
 
     if index_name in pinecone.list_indexes():
         pinecone.delete_index(index_name)
@@ -67,7 +67,7 @@ def embed_splits_openai(all_splits, index_name):
     
     embeddings = OpenAIEmbeddings()
 
-    vectordb = Pinecone.from_documents(all_splits[:1], embeddings, index_name=index_name)
+    vectordb = PineconeVectorStore.from_documents(all_splits[:1], embeddings, index_name=index_name)
 
     for i in tqdm.tqdm(range(1, len(all_splits))):
         vectordb.add_documents(all_splits[:i])
@@ -92,13 +92,13 @@ if __name__ == '__main__':
         print("Initializing the pinecone index...")
         index = init_pinecone_index(index_name, pinecone_api_key, pinecone_env)
         print("we've created an index and here is it's description") 
-        index.describe_index_stats()
+        print(index.describe_index_stats())
     else:
-        pinecone.init(api_key=pinecone_api_key, environment=pinecone_env)
+        pinecone = Pinecone(api_key=pinecone_api_key, environment=pinecone_env)
         index = pinecone.Index(index_name)
         print("we've loaded an existing index and here is it's description")
-        index.describe_index_stats()
+        print(index.describe_index_stats())
     print("let's embed the splits into the index, this might take some time and will cost you $")
     embed_splits_openai(all_splits, index_name)
     print("... and we're done! here is the index description again")
-    index.describe_index_stats()
+    print(index.describe_index_stats())

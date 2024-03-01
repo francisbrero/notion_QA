@@ -1,6 +1,9 @@
 pinecone-client
 tqdm
 langchain
+langchain_community
+langchain-openai
+langchain_pinecone
 llama-cpp-python
 python-dotenv
 openai

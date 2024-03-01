@@ -1,7 +1,7 @@
 # Import necessary modules
 import streamlit as st
 from langchain.chains import RetrievalQAWithSourcesChain
-from langchain.chat_models import ChatOpenAI
+from langchain_community.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts import PromptTemplate
 from utils import init_rag, add_sidebar, format_sources
