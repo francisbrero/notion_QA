@@ -3,11 +3,11 @@
 Build a chatbot trained on your Notion Workspace data and host it via Streamlit
 ![Alt text](image.png)
 
-# Available in Streamlit for testing
+## Available in Streamlit for testing
 
 [Internal MadKudu Version](https://mk-support-runbook.streamlit.app/)
 
-# Download your Notion Workspace data
+## Download your Notion Workspace data
 
 1. Go to your Notion Workspace
 2. Click on Settings & Members
@@ -21,16 +21,16 @@ Build a chatbot trained on your Notion Workspace data and host it via Streamlit
 
 NB: you may also download the data from one sub page of your Notion Workspace to try things out
 
-# Technical setup
+## Technical setup
 
-## Create a virtual environment
+### Create a virtual environment
 
 ```
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-## Install the requirements
+### Install the requirements
 
 ```bash
 pip install -r requirements.txt
@@ -42,7 +42,7 @@ Should you want to upgrade the requirements, you can run the following command:
 pip install --upgrade --force-reinstall -r requirements.txt
 ```
 
-## Run embeddings for a Notion workspace
+### Run embeddings for a Notion workspace
 
 Note: this will take a while as it drops and creates your vector database
 
@@ -50,13 +50,13 @@ Note: this will take a while as it drops and creates your vector database
 python ./notion/embed_notion.py --n support_runbook
 ```
 
-## Run the chatbot with streamlit
+### Run the chatbot with streamlit
 
 ```bash
 streamlit run ./notion/support.py
 ```
 
-## Add more documents from Notion to your vector database
+### Add more documents from Notion to your vector database
 
 if you want to add more documents from a Notion export to your vector database, you can run the following command
 
@@ -65,7 +65,7 @@ python ./notion/embed_notion.py --n product_operations --insert
 python ./notion/embed_notion.py --n playbooks_faq --insert
 ```
 
-### Add more documents from Zendesk to your vector database
+#### Add more documents from Zendesk to your vector database
 
 if you want to add more documents from a Zendesk export to your vector database, you can run the following command
 
